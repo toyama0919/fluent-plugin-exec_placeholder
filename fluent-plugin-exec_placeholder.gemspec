@@ -19,9 +19,9 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'test-unit'
   gem.add_development_dependency 'bundler'
-  gem.add_development_dependency 'pry', '~> 0.10.1'
-  gem.add_development_dependency 'rake', '~> 10.3.2'
-  gem.add_development_dependency 'rubocop', '~> 0.24.1'
-  gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
-  gem.add_development_dependency 'yard', '~> 0.8'
+  gem.add_development_dependency 'pry'
+  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rubocop'
+  gem.add_development_dependency 'rubygems-tasks'
+  gem.add_development_dependency 'yard'
 end
