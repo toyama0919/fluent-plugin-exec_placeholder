@@ -2,9 +2,9 @@
 
 Gem::Specification.new do |gem|
   gem.name          = "fluent-plugin-exec_placeholder"
-  gem.version       = "0.0.1"
-  gem.summary       = %q{ExecPlaceholder plugin for fluentd}
-  gem.description   = %q{ExecPlaceholder plugin for fluentd}
+  gem.version       = "0.0.2"
+  gem.summary       = %q{execute external command with placeholder plugin for fluentd}
+  gem.description   = %q{execute external command with placeholder plugin for fluentd}
   gem.license       = "MIT"
   gem.authors       = ["toyama0919"]
   gem.email         = "toyama0919@gmail.com"
