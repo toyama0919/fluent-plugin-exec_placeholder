@@ -15,7 +15,11 @@ module Fluent
 
     def configure(conf)
       super
-      @erb = ERB.new(@command.gsub(PLACEHOLDER_REGEXP, ERB_REGEXP))
+      command = @command.gsub('${tag}', '<%=tag %>')
+      command = command.gsub('${time}', '<%=time %>')
+      command = command.gsub(PLACEHOLDER_REGEXP, ERB_REGEXP)
+      log.info(%Q{command => #{command}})
+      @erb = ERB.new(command)
     end
 
     def format(tag, time, record)
@@ -24,7 +28,7 @@ module Fluent
 
     def emit(tag, es, chain)
       es.each {|time, record|
-        prog = @erb.result(binding)
+        prog = get_prog(tag, time, record)
         system(prog)
         ecode = $?.to_i
         if ecode != 0
@@ -32,6 +36,12 @@ module Fluent
         end
       }
       chain.next
+    end
+
+    private
+
+    def get_prog(tag, time, record)
+      @erb.result(binding)
     end
   end
 end
