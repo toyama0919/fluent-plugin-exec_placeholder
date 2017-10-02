@@ -1,6 +1,7 @@
 require 'erb'
+require 'fluent/plugin/output'
 
-module Fluent
+module Fluent::Plugin
   class ExecPlaceholderOutput < Output
     Fluent::Plugin.register_output('exec_placeholder', self)
     PLACEHOLDER_REGEXP = /\$\{([^}]+)\}/
@@ -26,7 +27,7 @@ module Fluent
       [tag, time, record].to_msgpack
     end
 
-    def emit(tag, es, chain)
+    def process(tag, es)
       es.each {|time, record|
         prog = get_prog(tag, time, record)
         system(prog)
@@ -35,7 +36,6 @@ module Fluent
           raise "command returns #{ecode}: #{prog}"
         end
       }
-      chain.next
     end
 
     private
